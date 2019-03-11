@@ -4,12 +4,10 @@
 \alias{ascii_grid}
 \title{Converts an ASCII map to a matrix}
 \usage{
-ascii_grid(image_map, file = NULL)
+ascii_grid(image_map)
 }
 \arguments{
 \item{image_map}{Map from ascii_map}
-
-\item{file}{Save as csv file if not null}
 }
 \value{
 A matrix

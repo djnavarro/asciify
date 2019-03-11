@@ -29,12 +29,11 @@ ascii_plot <- function(image_map, charsize = 4) {
 #' Converts an ASCII map to a matrix
 #'
 #' @param image_map Map from ascii_map
-#' @param file Save as csv file if not null
 #' @return A matrix
 #' @examples
 #' print("hi")
 #' @export
-ascii_grid <- function(image_map, file = NULL) {
+ascii_grid <- function(image_map) {
   
   # initialise as a matrix of white space
   text_grid <- matrix(
@@ -48,19 +47,85 @@ ascii_grid <- function(image_map, file = NULL) {
     text_grid[image_map$y[i], image_map$x[i]] <- image_map$label[i]
   }
   
-  # for convenience, write to a CSV file if 
-  # the user specifies a file path
-  if(!is.null(file)) {
-    write.table(
-      x = as.data.frame(text_grid),
-      file = file, 
-      quote = FALSE,
-      row.names = FALSE, 
-      col.names = FALSE)
-  }
-  
   return(text_grid)
   
 }
 
+#' Writes an ASCII grid to text file
+#'
+#' @param text_grid Matrix from ascii_grid
+#' @param file Path to text file
+#' @return A matrix, invisibly
+#' @examples
+#' print("hi")
+#' @export
+ascii_text <- function(text_grid, file) {
+  
+  write.table(
+    x = as.data.frame(text_grid),
+    file = file, 
+    quote = FALSE,
+    row.names = FALSE, 
+    col.names = FALSE)
+  
+  # invisibly return the original object
+  return(invisible(text_grid))
+  
+}
+
+#' Writes an ASCII grid to an HTML file with the rain animation
+#'
+#' @param text_grid Matrix from ascii_grid
+#' @param file Path to HMTL file
+#' @return A matrix, invisibly
+#' @examples
+#' print("hi")
+#' @importFrom dplyr %>%
+#' @importFrom stringr str_replace_all
+#' @importFrom stringr fixed
+#' @export
+ascii_rain <- function(text_grid, file) {
+  
+  ncol <- ncol(text_grid)
+  nrow <- nrow(text_grid)
+  
+  # construct the HTML table
+  str <- "<table class = 'matrix'>"
+  for(r in 1:nrow) {
+    str <- paste0(str,"<tr>")
+    for(c in 1:ncol) {
+      str <- paste0(str, "<td id='c",r,"_",c,"'>",text_grid[r,c],"</td>")
+    }
+  }
+  str <- paste0(str,"</table>")
+  
+  # write into the HTML template
+  readLines(con = here::here("data", "matrix-template.html")) %>%
+    stringr::str_replace_all(
+      pattern = fixed("{{matrix-table-here}}"),
+      replacement = fixed(str)) %>%
+    stringr::str_replace_all(
+      pattern = stringr::fixed("{{ncol}}"), 
+      replacement = stringr::fixed(as.character(ncol))) %>%
+    stringr::str_replace_all(
+      pattern = stringr::fixed("{{nrow}}"), 
+      replacement = fixed(as.character(nrow-1))) %>%
+    stringr::str_replace_all(
+      pattern = stringr::fixed("{{font-size}}"), 
+      replacement = stringr::fixed(fontsize)) %>%   
+    stringr::str_replace_all(
+      pattern = stringr::fixed("{{line-height}}"), 
+      replacement = stringr::fixed(lineheight)) %>%
+    str_replace_all(
+      pattern = stringr::fixed("{{onprob}}"), 
+      replacement = stringr::fixed(as.character(on_prob))) %>%    
+    stringr::str_replace_all(
+      pattern = stringr::fixed("{{offprob}}"), 
+      replacement = stringr::fixed(as.character(off_prob))) %>%    
+    writeLines(file)
+  
+  # invisibly return the original object
+  return(invisible(text_grid))
+  
+}
 

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <title></title>
+
+      <!-- CSS styling the image -->
+      <style>
+            .matrix{
+              font-family: "Roboto Mono","sans-serif";
+	            font-size: {{font-size}};
+	            font-style: "normal";
+	            font-variant:  "normal";
+              font-weight: "bold";
+	            line-height: {{line-height}};
+              padding: 0px;
+              text-align: "center";
+            }
+      </style>
+
+      <!-- javascript to control the animation -->
+      <script>
+        function animate() {
+          
+          // parameters for the animation
+          var state = [];
+          var ncol = {{ncol}};
+          var nrow = {{nrow}};
+          var onProb = {{onprob}};
+          var offProb = {{offprob}};
+          var rate = 100;
+        
+          // initial state is hidden for all cells
+          for(c = 0; c < ncol; c++) {
+            state[c] = "hidden";
+          }
+          for(r = 0; r < nrow; r++) {
+            for(c = 0; c < ncol; c++) {
+              thiscell = "c" + (r+1).toString() + "_" + (c+1).toString();
+              document.getElementById(thiscell).style.visibility = "hidden";
+            }
+          }
+          
+          // define a state update function
+          function updatestate(){
+            var u;
+            var thiscell;
+            var lastcell;
+            
+            for(c = 0; c < ncol; c++) {
+              u = Math.random();
+              thiscell = "c1_" + (c+1);
+              if( state[c]=="hidden" & u < onProb) {
+                state[c] = "visible";
+                document.getElementById(thiscell).style.visibility = "visible";
+              } else {
+                if ( state[c]=="visible" & u < offProb) {
+                  state[c] = "hidden";
+                  document.getElementById(thiscell).style.visibility = "hidden";
+                }
+              }
+            }
+                 
+            for(r = nrow; r > 0; r--) {
+              for(c = 0; c < ncol; c++) {
+                thiscell = "c" + (r+1).toString() + "_" + (c+1).toString();
+                lastcell = "c" + (r).toString() + "_" + (c+1).toString();
+                  document.getElementById(thiscell).style.visibility =
+                    document.getElementById(lastcell).style.visibility;
+              }
+            }
+          }
+          
+          // repeatedly call the update function
+          setInterval(updatestate, rate);
+        }
+      </script>
+      
+    </head>
+
+    <!-- HTML defining the matrix -->
+    <body onload="animate()">
+      {{matrix-table-here}}
+    </body>
+
+
+</html>

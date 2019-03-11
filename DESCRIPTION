@@ -15,4 +15,5 @@ Imports:
     dplyr,
     purrr,
     ggplot2,
-    tibble
+    tibble,
+    stringr
