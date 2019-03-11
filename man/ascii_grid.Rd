@@ -16,5 +16,7 @@ A matrix
 Converts an ASCII map to a matrix
 }
 \examples{
-print("hi")
+bayes_img <- ascii_data("bayes.png") # path to the bayes image
+bayes_map <- ascii_map(bayes_img)    # construct ASCII map
+bayes_grid <- ascii_grid(bayes_map)  # make grid
 }

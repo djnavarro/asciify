@@ -37,7 +37,9 @@ ascii_plot <- function(image_map, charsize = 4) {
 #' @param image_map Map from ascii_map
 #' @return A matrix
 #' @examples
-#' print("hi")
+#' bayes_img <- ascii_data("bayes.png") # path to the bayes image
+#' bayes_map <- ascii_map(bayes_img)    # construct ASCII map
+#' bayes_grid <- ascii_grid(bayes_map)  # make grid
 #' @export
 ascii_grid <- function(image_map) {
   
@@ -63,7 +65,12 @@ ascii_grid <- function(image_map) {
 #' @param file Path to text file
 #' @return A matrix, invisibly
 #' @examples
-#' print("hi")
+#' ## Not run:
+#' bayes_img <- ascii_data("bayes.png") # path to the bayes image
+#' bayes_map <- ascii_map(bayes_img)    # construct ASCII map
+#' bayes_grid <- ascii_grid(bayes_map)   # make grid
+#' ascii_text(bayes_grid, file = "bayes_grid.txt")
+#' ## End(Not run)
 #' @importFrom utils write.table
 #' @export
 ascii_text <- function(text_grid, file) {
@@ -83,15 +90,20 @@ ascii_text <- function(text_grid, file) {
 
 #' Specifies path to one of the data files in the package
 #'
-#' @param file Name of file
-#' @return Path to file
+#' @param file Name of file as a character string
+#' @details This is a convenience function that returns the path to one of the
+#' external data files bundled in the asciify package. There are only four 
+#' such files: "bayes.png", "unicorn.png", "heart.jpg", "rain.html"
+#' @return Path to file as a character string
 #' @examples
-#' print("hi")
+#' ascii_data("bayes.png")
+#' ascii_data("unicorn.png")
+#' ascii_data("heart.jpg")
+#' ascii_data("rain.html")
 #' @export
 ascii_data <- function(file) {
   system.file("extdata", file, package = "asciify", mustWork = TRUE)
 }
-
 
 #' Writes an ASCII grid to an HTML file with the rain animation
 #'
@@ -103,7 +115,12 @@ ascii_data <- function(file) {
 #' @param turnoff Animation parameter
 #' @return A matrix, invisibly
 #' @examples
-#' print("hi")
+#' ## Not run:
+#' bayes_img <- ascii_data("bayes.png") # path to the bayes image
+#' bayes_map <- ascii_map(bayes_img)    # construct ASCII map
+#' bayes_grid <- ascii_grid(bayes_map)   # make grid
+#' ascii_rain(bayes_grid, file = "bayes_rain.html")
+#' ## End(Not run)
 #' @importFrom dplyr %>%
 #' @importFrom stringr str_replace_all
 #' @importFrom stringr fixed

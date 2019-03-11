@@ -7,14 +7,22 @@
 ascii_data(file)
 }
 \arguments{
-\item{file}{Name of file}
+\item{file}{Name of file as a character string}
 }
 \value{
-Path to file
+Path to file as a character string
 }
 \description{
 Specifies path to one of the data files in the package
 }
+\details{
+This is a convenience function that returns the path to one of the
+external data files bundled in the asciify package. There are only four 
+such files: "bayes.png", "unicorn.png", "heart.jpg", "rain.html"
+}
 \examples{
-print("hi")
+ascii_data("bayes.png")
+ascii_data("unicorn.png")
+ascii_data("heart.jpg")
+ascii_data("rain.html")
 }

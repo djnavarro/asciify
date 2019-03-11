@@ -27,5 +27,10 @@ A matrix, invisibly
 Writes an ASCII grid to an HTML file with the rain animation
 }
 \examples{
-print("hi")
+## Not run:
+bayes_img <- ascii_data("bayes.png") # path to the bayes image
+bayes_map <- ascii_map(bayes_img)    # construct ASCII map
+bayes_grid <- ascii_grid(bayes_map)   # make grid
+ascii_rain(bayes_grid, file = "bayes_rain.html")
+## End(Not run)
 }

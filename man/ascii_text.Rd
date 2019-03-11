@@ -18,5 +18,10 @@ A matrix, invisibly
 Writes an ASCII grid to text file
 }
 \examples{
-print("hi")
+## Not run:
+bayes_img <- ascii_data("bayes.png") # path to the bayes image
+bayes_map <- ascii_map(bayes_img)    # construct ASCII map
+bayes_grid <- ascii_grid(bayes_map)   # make grid
+ascii_text(bayes_grid, file = "bayes_grid.txt")
+## End(Not run)
 }
