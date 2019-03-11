@@ -77,14 +77,24 @@ ascii_text <- function(text_grid, file) {
 #'
 #' @param text_grid Matrix from ascii_grid
 #' @param file Path to HMTL file
+#' @param fontsize How big is the text
+#' @param lineheight How tall is a line
+#' @param turnon Animation parameter
+#' @param turnoff Animation parameter
 #' @return A matrix, invisibly
 #' @examples
 #' print("hi")
 #' @importFrom dplyr %>%
 #' @importFrom stringr str_replace_all
 #' @importFrom stringr fixed
+#' @importFrom here here
 #' @export
-ascii_rain <- function(text_grid, file) {
+ascii_rain <- function(text_grid, 
+                       file,
+                       fontsize = "5px",
+                       lineheight = "4px",
+                       turnon = 0.1,
+                       turnoff = 0.025) {
   
   ncol <- ncol(text_grid)
   nrow <- nrow(text_grid)
@@ -100,7 +110,7 @@ ascii_rain <- function(text_grid, file) {
   str <- paste0(str,"</table>")
   
   # write into the HTML template
-  readLines(con = here::here("data", "matrix-template.html")) %>%
+  readLines(con = here::here("inst", "extdata", "matrix-template.html")) %>%
     stringr::str_replace_all(
       pattern = fixed("{{matrix-table-here}}"),
       replacement = fixed(str)) %>%
@@ -118,10 +128,10 @@ ascii_rain <- function(text_grid, file) {
       replacement = stringr::fixed(lineheight)) %>%
     str_replace_all(
       pattern = stringr::fixed("{{onprob}}"), 
-      replacement = stringr::fixed(as.character(on_prob))) %>%    
+      replacement = stringr::fixed(as.character(turnon))) %>%    
     stringr::str_replace_all(
       pattern = stringr::fixed("{{offprob}}"), 
-      replacement = stringr::fixed(as.character(off_prob))) %>%    
+      replacement = stringr::fixed(as.character(turnoff))) %>%    
     writeLines(file)
   
   # invisibly return the original object

@@ -4,12 +4,21 @@
 \alias{ascii_rain}
 \title{Writes an ASCII grid to an HTML file with the rain animation}
 \usage{
-ascii_rain(text_grid, file)
+ascii_rain(text_grid, file, fontsize = "5px", lineheight = "4px",
+  turnon = 0.1, turnoff = 0.025)
 }
 \arguments{
 \item{text_grid}{Matrix from ascii_grid}
 
 \item{file}{Path to HMTL file}
+
+\item{fontsize}{How big is the text}
+
+\item{lineheight}{How tall is a line}
+
+\item{turnon}{Animation parameter}
+
+\item{turnoff}{Animation parameter}
 }
 \value{
 A matrix, invisibly
