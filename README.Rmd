@@ -9,9 +9,8 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-<!--
 [![Travis build status](https://travis-ci.org/djnavarro/asciify.svg?branch=master)](https://travis-ci.org/djnavarro/asciify)
--->
+
 
 A package to create ASCII art from arbitrary images. At the moment the documentation is more or less nonexistent. 
 
@@ -51,3 +50,9 @@ You can also write an HTML version with a "rain" animation
 ```{r}
 #ascii_rain(bayes_grid, file = "something.html")
 ```
+
+<!--
+An example of the output is 
+
+<iframe src="bayes_rain.html" width="680px", height="450px"></iframe>
+-->
