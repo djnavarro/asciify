@@ -13,10 +13,41 @@ knitr::opts_chunk$set(echo = TRUE)
 [![Travis build status](https://travis-ci.org/djnavarro/asciify.svg?branch=master)](https://travis-ci.org/djnavarro/asciify)
 -->
 
+A package to create ASCII art from arbitrary images. At the moment the documentation is more or less nonexistent. 
 
 ```{r install}
 # devtools::install_github("djnavarro/asciify")
 library("asciify")
 ```
 
+The core function is `ascii_map`:
 
+```{r, warning=FALSE}
+bayes_img <- here::here("inst", "extdata", "thomas-bayes.png")
+bayes_map <- ascii_map(filename = bayes_img)
+bayes_map
+```
+
+There's a minimalistic plot function:
+```{r plotting}
+ascii_plot(bayes_map, charsize = 2)
+```
+
+You can convert to a matrix "grid" of characters:
+
+```{r}
+bayes_grid <- ascii_grid(bayes_map)
+str(bayes_grid)
+```
+
+You can write this matrix to a text file using `ascii_text`
+
+```{r}
+#ascii_text(bayes_grid, file = "something.txt")
+```
+
+You can also write an HTML version with a "rain" animation
+
+```{r}
+#ascii_rain(bayes_grid, file = "something.html")
+```

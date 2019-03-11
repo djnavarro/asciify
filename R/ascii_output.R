@@ -97,6 +97,10 @@ ascii_rain <- function(text_grid,
                        turnon = 0.1,
                        turnoff = 0.025) {
   
+  # NOTE: this function is essentially a cut and paste job
+  # from the "itsraining" project. It could almost certainly
+  # be done better. Job for later
+  
   ncol <- ncol(text_grid)
   nrow <- nrow(text_grid)
   
