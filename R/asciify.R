@@ -1,5 +1,5 @@
 
-# function to compute the lightness of a character
+# function to compute the lightness of a character.
 # called internally by ascii_map, but not exported
 #' @importFrom graphics text
 #' @importFrom imager implot
@@ -14,48 +14,83 @@ lightness <- function(chr) {
   mean()
 }
 
+# function to compute the lightnesses of all characters, 
+# and return a tibble. called internally but not exported
+#' @importFrom purrr map_dbl
+#' @importFrom tibble tibble
+#' @importFrom dplyr arrange
+map_chars <- function(alphabet) {
+  
+  alphabet_data <- tibble::tibble(
+      alphabet = alphabet,
+      value = purrr::map_dbl(.x = alphabet, .f = lightness)
+    ) %>% 
+    dplyr::arrange(value)
+    
+  return(alphabet_data)
+}
+
+
+# function to import the image in a suitable format
+# called internally by ascii_map, but not exported
+#' @importFrom imager load.image
+#' @importFrom imager as.cimg
+import_image <- function(filename) {
+  im <- imager::load.image(filename) 
+  im <- imager::as.cimg(im[,,1:3])
+  return(im)
+}
+
 
 #' Creates ASCII art from an image
 #'
-#' @param file A character string specifying the path to the file
-#' @param charset A character string that lists the set of characters to use
+#' @param filename A character string specifying the path to the file
+#' @param alphabet A character string that lists the set of characters to use
 #' @param threshold Lightness value at which to truncate
 #' @return A data frame with...
 #' @examples
 #' print("hi")
-#' @importFrom imager load.image
-#' @importFrom imager as.cimg
 #' @importFrom imager grayscale
 #' @importFrom imager imresize
 #' @importFrom dplyr %>%
 #' @importFrom dplyr mutate
 #' @importFrom dplyr filter
+#' @importFrom dplyr select
 #' @importFrom purrr map_dbl
 #' @importFrom ggplot2 cut_number
+#' @importFrom tibble as_tibble
 #' @export
-ascii_map <- function(file, charset = c(LETTERS, letters), threshold = .5){
+ascii_map <- function(filename, 
+                      alphabet = c(LETTERS, letters), 
+                      threshold = .5){
   
-  # load image
-  im <- imager::load.image(file) 
-  im <- imager::as.cimg(im[,,1:3])
+  # set up for the mapping
+  image <- import_image(filename)    # import the image
+  alphabet_data <- map_chars(alphabet) # information about the alphabet
+  n <- length(alphabet)           # how many characters?
   
-  # compute lightness of all characters
-  g <- purrr::map_dbl(.x = charset, .f = lightness)
+  # convert the image to grayscale, resize, convert to data frame
+  image_map <- image %>% 
+    imager::grayscale() %>%  # convert to greyscale
+    imager::imresize(.15)    # resize the image (hack!)
   
-  # sort and count
-  charset <- charset[order(g)]
-  n <- length(charset)
+  # convert from cimg to data frame (with variables x, y and value),
+  # and then to a tibble because I don't like data frames
+  image_map <- image_map %>% 
+    as.data.frame() %>%
+    tibble::as_tibble()
+
+  # strip out cells below threshold (too bright)
+  image_map <- image_map %>%  
+    dplyr::filter(value < threshold)
   
-  # convert the image to grayscale, resize, convert to data.frame, 
   # quantise image at the number of distinct characters
-  charmap <- imager::grayscale(im) %>%     # convert to greyscale
-    imager::imresize(.15) %>%              # resize the image (hack!)
-    as.data.frame() %>%                    # convert to tibble
-    dplyr::filter(value < threshold) %>%   # threshold the image
+  image_map <- image_map %>%  
     dplyr::mutate(
       qv = ggplot2::cut_number(value, n) %>% as.integer(), # discretise
-      char = charset[qv]  # map to a character
-    )
+      label = alphabet_data$alphabet[qv]  # map to a character
+    ) %>% 
+    dplyr::select(x,y,label)
   
-  return(charmap)
+  return(image_map)
 }

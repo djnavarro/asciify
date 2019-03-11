@@ -14,4 +14,5 @@ Imports:
     imager,
     dplyr,
     purrr,
-    ggplot2
+    ggplot2,
+    tibble

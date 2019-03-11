@@ -4,12 +4,12 @@
 \alias{ascii_map}
 \title{Creates ASCII art from an image}
 \usage{
-ascii_map(file, charset = c(LETTERS, letters), threshold = 0.5)
+ascii_map(filename, alphabet = c(LETTERS, letters), threshold = 0.5)
 }
 \arguments{
-\item{file}{A character string specifying the path to the file}
+\item{filename}{A character string specifying the path to the file}
 
-\item{charset}{A character string that lists the set of characters to use}
+\item{alphabet}{A character string that lists the set of characters to use}
 
 \item{threshold}{Lightness value at which to truncate}
 }
