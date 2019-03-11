@@ -58,6 +58,7 @@ ascii_grid <- function(image_map) {
 #' @return A matrix, invisibly
 #' @examples
 #' print("hi")
+#' @importFrom utils write.table
 #' @export
 ascii_text <- function(text_grid, file) {
   
