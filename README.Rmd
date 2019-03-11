@@ -1,12 +1,22 @@
-asciify
-================
-Danielle Navarro
-11 March 2019
+---
+title: "asciify"
+author: "Danielle Navarro"
+date: "11 March 2019"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 
 <!--
 [![Travis build status](https://travis-ci.org/djnavarro/asciify.svg?branch=master)](https://travis-ci.org/djnavarro/asciify)
 -->
-``` r
+
+
+```{r install}
 # devtools::install_github("djnavarro/asciify")
 library("asciify")
 ```
+
+
