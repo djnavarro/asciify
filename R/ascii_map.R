@@ -100,22 +100,39 @@ map_image <- function(image, threshold, rescale) {
 
 #' Creates ASCII art from an image
 #'
-#' @param filename A character string specifying the path to the file
-#' @param alphabet A character string that lists the set of characters to use
+#' @param file A character string specifying the path to the file
+#' @param alphabet A character vector that lists the set of characters to use
 #' @param rescale Scale to resize image to (if NULL, sets maximum size of 100x100)
 #' @param threshold Lightness value at which to truncate
-#' @return A data frame with...
+#' @details This is the workhorse function for the package. The user specifies 
+#' the path to the image fil` as a character vector, and the function returns
+#' a tibble specifying the map. You can customise the set of characters used to
+#' render the image by changing the alphabet argument. The amount of whitespace
+#' in the ASCII image depends on the threshold parameter, which specifies the
+#' maximum brightness (in greyscale terms, from 0 to 1) at which the relevant 
+#' cell in the output will be mapped to a character. Pixels in the image 
+#' brighter than the threshold are automatically mapped to whitespace. Finally,
+#' you can "rescale" the input image. By default, images are rescaled so that 
+#' the largest dimension is 100 pixels, but you can choose any rescaling factor
+#' you want. If your original image is 600x400 you could specify rescale = .1 
+#' which would result in a character map that is 60x40 characters is size
+#' @return The function returns a tibble with three variables. The x and y 
+#' variables specify co-ordinates on the grid, and the label variable specifies
+#' the character that should be shown at that point. Whitespace characters are
+#' not included in the output.
 #' @examples
-#' print("hi")
+#' bayes_img <- ascii_data("bayes.png")
+#' bayes_map <- ascii_map(file = bayes_img)
+#' bayes_map
 #' @importFrom dplyr %>%
 #' @importFrom dplyr select
 #' @export
-ascii_map <- function(filename, 
+ascii_map <- function(file, 
                       alphabet = letters, 
                       rescale = NULL,
                       threshold = .5){
   
-  image <- import_image(filename)   # import the image
+  image <- import_image(file)   # import the image
   dictionary <- map_chars(alphabet) # information about the alphabet
   
   image_map <- image %>% 

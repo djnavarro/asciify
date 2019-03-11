@@ -3,8 +3,9 @@ asciify
 Danielle Navarro
 11 March 2019
 
+<!--
 [![Travis build status](https://travis-ci.org/djnavarro/asciify.svg?branch=master)](https://travis-ci.org/djnavarro/asciify)
-
+-->
 A package to create ASCII art from arbitrary images. At the moment the documentation is more or less nonexistent.
 
 ``` r
@@ -16,7 +17,7 @@ The core function is `ascii_map`:
 
 ``` r
 bayes_img <- here::here("inst", "extdata", "thomas-bayes.png")
-bayes_map <- ascii_map(filename = bayes_img)
+bayes_map <- ascii_map(file = bayes_img)
 bayes_map
 ```
 

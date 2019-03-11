@@ -1,11 +1,17 @@
 
-#' Plots an ASCII map
+#' Plots an ASCII character map
 #'
-#' @param image_map Map from ascii_map
+#' @param image_map A tibble specifying a character map
 #' @param charsize Size of the characters
-#' @return A ggplot object
+#' @details A simple plotting function for a character map. It takes a tibble
+#' as input, in the form output by the ascii_map function, and plots it using 
+#' ggplot2. The charsize argument allows you to customise the size of the 
+#' characters in the plot
+#' @return A ggplot object. 
 #' @examples
-#' print("hi")
+#' bayes_img <- ascii_data("bayes.png")
+#' bayes_map <- ascii_map(file = bayes_img)
+#' ascii_plot(bayes_map)
 #' @importFrom ggplot2 ggplot
 #' @importFrom ggplot2 aes
 #' @importFrom ggplot2 geom_text
@@ -74,6 +80,19 @@ ascii_text <- function(text_grid, file) {
   
 }
 
+
+#' Specifies path to one of the data files in the package
+#'
+#' @param file Name of file
+#' @return Path to file
+#' @examples
+#' print("hi")
+#' @export
+ascii_data <- function(file) {
+  system.file("extdata", file, package = "asciify", mustWork = TRUE)
+}
+
+
 #' Writes an ASCII grid to an HTML file with the rain animation
 #'
 #' @param text_grid Matrix from ascii_grid
@@ -88,7 +107,6 @@ ascii_text <- function(text_grid, file) {
 #' @importFrom dplyr %>%
 #' @importFrom stringr str_replace_all
 #' @importFrom stringr fixed
-#' @importFrom here here
 #' @export
 ascii_rain <- function(text_grid, 
                        file,
@@ -115,7 +133,7 @@ ascii_rain <- function(text_grid,
   str <- paste0(str,"</table>")
   
   # write into the HTML template
-  readLines(con = here::here("inst", "extdata", "matrix-template.html")) %>%
+  readLines(con = ascii_data("rain.html")) %>%
     stringr::str_replace_all(
       pattern = fixed("{{matrix-table-here}}"),
       replacement = fixed(str)) %>%

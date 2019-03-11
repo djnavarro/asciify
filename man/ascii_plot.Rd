@@ -2,21 +2,29 @@
 % Please edit documentation in R/ascii_output.R
 \name{ascii_plot}
 \alias{ascii_plot}
-\title{Plots an ASCII map}
+\title{Plots an ASCII character map}
 \usage{
 ascii_plot(image_map, charsize = 4)
 }
 \arguments{
-\item{image_map}{Map from ascii_map}
+\item{image_map}{A tibble specifying a character map}
 
 \item{charsize}{Size of the characters}
 }
 \value{
-A ggplot object
+A ggplot object.
 }
 \description{
-Plots an ASCII map
+Plots an ASCII character map
+}
+\details{
+A simple plotting function for a character map. It takes a tibble
+as input, in the form output by the ascii_map function, and plots it using 
+ggplot2. The charsize argument allows you to customise the size of the 
+characters in the plot
 }
 \examples{
-print("hi")
+bayes_img <- ascii_data("bayes.png")
+bayes_map <- ascii_map(file = bayes_img)
+ascii_plot(bayes_map)
 }
