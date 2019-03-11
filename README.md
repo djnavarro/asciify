@@ -16,8 +16,8 @@ library("asciify")
 The core function is `ascii_map`:
 
 ``` r
-bayes_img <- here::here("inst", "extdata", "thomas-bayes.png")
-bayes_map <- ascii_map(file = bayes_img)
+bayes_img <- ascii_data("bayes.png")      # path to the bayes image
+bayes_map <- ascii_map(file = bayes_img)  # construct ASCII map
 bayes_map
 ```
 
