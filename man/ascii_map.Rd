@@ -4,12 +4,15 @@
 \alias{ascii_map}
 \title{Creates ASCII art from an image}
 \usage{
-ascii_map(filename, alphabet = letters, threshold = 0.5)
+ascii_map(filename, alphabet = letters, rescale = NULL,
+  threshold = 0.5)
 }
 \arguments{
 \item{filename}{A character string specifying the path to the file}
 
 \item{alphabet}{A character string that lists the set of characters to use}
+
+\item{rescale}{Scale to resize image to (if NULL, sets maximum size of 100x100)}
 
 \item{threshold}{Lightness value at which to truncate}
 }
