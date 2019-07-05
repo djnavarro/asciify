@@ -1,3 +1,4 @@
+utils::globalVariables(c("x", "y", "label", "value"), package = "asciify")
 
 # function to compute the lightness of a character.
 # called internally by ascii_map, but not exported

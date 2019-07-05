@@ -7,3 +7,7 @@
 ^README_files$
 ^bayes_rain.html$
 ^README.html$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^README\.Rmd$

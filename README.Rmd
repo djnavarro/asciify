@@ -1,17 +1,28 @@
 ---
-title: "asciify"
-author: "Danielle Navarro"
-date: "11 March 2019"
 output: github_document
 ---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+# asciify
+
+<!-- badges: start -->
+[![Travis build status](https://travis-ci.org/djnavarro/asciify.svg?branch=master)](https://travis-ci.org/djnavarro/asciify)
+[![CRAN status](https://www.r-pkg.org/badges/version/asciify)](https://cran.r-project.org/package=asciify)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+<!-- badges: end -->
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
-
-[![Travis build status](https://travis-ci.org/djnavarro/asciify.svg?branch=master)](https://travis-ci.org/djnavarro/asciify)
-
 
 A package to create ASCII art from arbitrary images. This is very much a work in progress and probably doesn't have a purpose, but I'm finding it fun.
 
@@ -53,8 +64,3 @@ Finally, for no particularly sensible reasion, the package also allows you to wr
 #ascii_rain(bayes_grid, file = "something.html")
 ```
 
-<!--
-An example of the output is 
-
-<iframe src="bayes_rain.html" width="680px", height="450px"></iframe>
--->

@@ -2,13 +2,19 @@ Package: asciify
 Type: Package
 Title: Make ASCII Art From Images
 Version: 0.1.0
-Author: Danielle Navarro
-Maintainer: Danielle Navarro <d.navarro@unsw.edu.au>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Authors@R: 
+    person(given = "Danielle",
+           family = "Navarro",
+           role = c("aut", "cre"),
+           email = "d.navarro@unsw.edu.au",
+           comment = c(ORCID = "0000-0001-7648-6578"))
+Description: Takes an arbitrary image as input and constructs an text-based
+    approximation to the image using the imager package.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+URL: https://github.com/djnavarro/asciify
+BugReports: https://github.com/djnavarro/asciify/issues
 RoxygenNote: 6.1.1
 Imports: 
     imager,
