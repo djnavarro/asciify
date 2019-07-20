@@ -13,9 +13,8 @@ status](https://www.r-pkg.org/badges/version/asciify)](https://cran.r-project.or
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
-A package to create ASCII art from arbitrary images. This is very much a
-work in progress and probably doesn’t have a purpose, but I’m finding it
-fun.
+A package to create ASCII art from arbitrary images. This is a work in
+progress and probably doesn’t have a purpose, but I’m finding it fun.
 
 ``` r
 # devtools::install_github("djnavarro/asciify")

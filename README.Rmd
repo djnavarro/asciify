@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-A package to create ASCII art from arbitrary images. This is very much a work in progress and probably doesn't have a purpose, but I'm finding it fun.
+A package to create ASCII art from arbitrary images. This is a work in progress and probably doesn't have a purpose, but I'm finding it fun.
 
 ```{r install}
 # devtools::install_github("djnavarro/asciify")
